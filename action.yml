@@ -1,0 +1,32 @@
+name: '.NET code metric analyzer'
+description: 'A Github action that maintains a CODE_METRICS.md file, reporting cyclomatic complexity, maintainability index, etc.'
+branding:
+  icon: sliders
+  color: purple
+inputs:
+  jira-url:
+    description: 'Sample text to search'
+    required: true
+  jira-user:
+    description: 'Sample text to search'
+    required: true
+  jira-api-key:
+    description: 'Sample text to search'
+    required: true
+outputs:
+  summary-title:
+    description: 'The title of the code metrics action.'
+  summary-details:
+    description: 'A detailed summary of all the projects that were flagged.'
+  updated-metrics:
+    description: 'A boolean value, indicating whether or not the CODE_METRICS.md was updated as a result of running this action.'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'
+  args:
+  - '--jira-url'
+  - ${{ inputs.jira-url }}
+  - '--jira-user'
+  - ${{ inputs.jira-user }}
+  - '--jira-api-key'
+  - ${{ inputs.jira-api-key }}
